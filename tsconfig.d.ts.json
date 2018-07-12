@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "outFile": "./dist/p-info.js",
+        "sourceMap": false,
+        "strict": true,
+        "module": "system",
+        "moduleResolution": "node",
+        "target": "es2017",
+        "jsx": "react",
+        "emitDeclarationOnly": true,
+        "declaration": true,
+        "types": [ "node", "jasmine" ]
+    }
+}

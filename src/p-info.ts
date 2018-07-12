@@ -139,7 +139,7 @@ export async function GetInfo(pid: number, fastPowershellCommandRunner?: Transfo
     }
 }
 
-export function GetInfoChannel(pid: number): TransformedChannel<number, ProcessInfo> & { Close(): void } {
+export function GetInfoChannel(): TransformedChannel<number, ProcessInfo> & { Close(): void } {
     let ps = new shell({});
     const fastPowershellCommand = TransformChannel<string, string>(command => {
         ps.addCommand(command);

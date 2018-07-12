@@ -3,7 +3,7 @@
     "start": "bash watch.sh"
   },
   "name": "p-info",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "main": "./dist/p-info.js",
   "types": "./dist/p-info.d.ts",
   "author": "yeerkkiller1 <yeerkkiller1@gmail.com>",
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.7",
     "@types/node": "^7.0.12",
-    "clean-typings-file": "^0.1.5",
+    "clean-typings-file": "^0.1.7",
     "jasmine": "^3.1.0",
     "run-when-changed": "^2.1.0",
     "source-map-loader": "^0.2.3",

@@ -2551,9 +2551,9 @@ node-libs-browser@^2.0.0:
     util "^0.10.3"
     vm-browserify "0.0.4"
 
-node-powershell@^3.3.1:
+"node-powershell@https://github.com/yeerkkiller1/node-powershell":
   version "3.3.1"
-  resolved "https://registry.yarnpkg.com/node-powershell/-/node-powershell-3.3.1.tgz#bbf76b29f091ed83eae16ad9e7a180a13f36d113"
+  resolved "https://github.com/yeerkkiller1/node-powershell#2cd24ccda844cff3ab65d73fce5de3c832cc3107"
   dependencies:
     bluebird "^3.5.1"
     chalk "^2.1.0"

@@ -140,7 +140,7 @@ export async function GetInfo(pid: number, fastPowershellCommandRunner?: Transfo
 }
 
 export function GetInfoChannel(): ((pid: number) => Promise<ProcessInfo>) & { Close(): void } {
-    let ps = new shell({});
+    let ps = new shell({ debugMsg: false });
     const fastPowershellCommand = TransformChannel<string, string>(command => {
         ps.addCommand(command);
         return ps.invoke();

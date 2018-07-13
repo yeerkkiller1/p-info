@@ -87,7 +87,7 @@ async function getWindowsInfo(pid: number, fastPowershellCommandRunner?: Transfo
     if(fastPowershellCommandRunner) {
         rawText = await fastPowershellCommandRunner(command);
     } else {
-        let ps = new shell({});
+        let ps = new shell({ debugMsg: false });
         ps.addCommand(command);
         rawText = await ps.invoke();
         ps.dispose();

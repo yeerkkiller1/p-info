@@ -2866,9 +2866,9 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-pchannel@0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/pchannel/-/pchannel-0.3.2.tgz#814da915b5f719fc6ba5ab619305bc9a1d7db6fb"
+pchannel@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/pchannel/-/pchannel-0.3.4.tgz#70ed287668496dac74ec4ec2e3525281d7b6e78b"
 
 pify@^2.0.0:
   version "2.3.0"
@@ -3788,6 +3788,10 @@ unset-value@^1.0.0:
 upath@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
+
+upgrade@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/upgrade/-/upgrade-1.1.0.tgz#4a50875ec5c715d19379799f0590a0e796958f61"
 
 uri-js@^4.2.1:
   version "4.2.2"

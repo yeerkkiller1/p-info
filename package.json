@@ -30,7 +30,8 @@
   "dependencies": {
     "@types/node-powershell": "^3.1.0",
     "node-powershell": "^3.3.1",
-    "pchannel": "0.3.2",
-    "table-parser": "^1.0.1"
+    "pchannel": "^0.3.4",
+    "table-parser": "^1.0.1",
+    "upgrade": "^1.1.0"
   }
 }

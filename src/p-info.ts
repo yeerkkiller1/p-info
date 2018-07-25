@@ -132,7 +132,7 @@ type ProcessInfo = WindowsInfo | LinuxInfo;
 export async function GetInfo(pid: number, fastPowershellCommandRunner?: TransformedChannel<string, string>): Promise<ProcessInfo> {
     if(process.platform === "win32") {
         return getWindowsInfo(pid);
-    } else if(process.platform === "linux") {
+    } else if(process.platform === "linux" || process.platform === "darwin") {
         return getLinuxInfo(pid);
     } else {
         throw new Error(`Unsupported platform ${process.platform}`);

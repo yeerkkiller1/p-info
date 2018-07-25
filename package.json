@@ -3,7 +3,7 @@
     "start": "bash watch.sh"
   },
   "name": "p-info",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "./dist/p-info.js",
   "types": "./dist/p-info.d.ts",
   "author": "yeerkkiller1 <yeerkkiller1@gmail.com>",

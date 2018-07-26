@@ -110,11 +110,12 @@ interface LinuxInfoRaw {
 //date -d "Thu Jul 12 07:01:47" +%s
 //date -j -f "%a %b %d %T %Y" "Wed Jul 25 17:51:03 2018" "+%s"
 async function mapLinuxInfo(info: LinuxInfoRaw) {
+    let start = String(info.STARTED).replace(/,/g, " ");
     let secondsSinceEpochCommand: string;
     if(process.platform === "darwin") {
-        secondsSinceEpochCommand = `date -j -f "%a %b %d %T %Y" "${info.STARTED}" "+%s"`;
+        secondsSinceEpochCommand = `date -j -f "%a %b %d %T %Y" "${start}" "+%s"`;
     } else {
-        secondsSinceEpochCommand = `date -d "${info.STARTED}" +%s`;
+        secondsSinceEpochCommand = `date -d "${start}" +%s`;
     }
     let startTime = new Date(+(await execPromise(secondsSinceEpochCommand)) * 1000);
     return {

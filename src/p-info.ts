@@ -108,8 +108,15 @@ interface LinuxInfoRaw {
     STARTED: string;
 }
 //date -d "Thu Jul 12 07:01:47" +%s
+//date -j -f "%a %b %d %T %Y" "Wed Jul 25 17:51:03 2018" "+%s"
 async function mapLinuxInfo(info: LinuxInfoRaw) {
-    let startTime = new Date(+(await execPromise(`date -d "${info.STARTED}" +%s`)) * 1000);
+    let secondsSinceEpochCommand: string;
+    if(process.platform === "darwin") {
+        secondsSinceEpochCommand = `date -j -f "%a %b %d %T %Y" "${info.STARTED}" "+%s"`;
+    } else {
+        secondsSinceEpochCommand = `date -d "${info.STARTED}" +%s`;
+    }
+    let startTime = new Date(+(await execPromise(secondsSinceEpochCommand)) * 1000);
     return {
         StartTime: startTime
     };

@@ -110,7 +110,7 @@ interface LinuxInfoRaw {
 //date -d "Thu Jul 12 07:01:47" +%s
 //date -j -f "%a %b %d %T %Y" "Wed Jul 25 17:51:03 2018" "+%s"
 async function mapLinuxInfo(info: LinuxInfoRaw) {
-    let start = String(info.STARTED).replace(/,/g, " ");
+    let start = String(info.STARTED).replace(/,/g, " ").trim();
     let secondsSinceEpochCommand: string;
     if(process.platform === "darwin") {
         secondsSinceEpochCommand = `date -j -f "%a %b %d %T %Y" "${start}" "+%s"`;
@@ -127,6 +127,13 @@ type UnwrapPromise<T> = T extends Promise<infer U> ? U : never;
 
 type LinuxInfo = UnwrapPromise<ReturnType<typeof mapLinuxInfo>>;
 async function getLinuxInfo(pid: number): Promise<LinuxInfo> {
+    let linuxRaw = await execPromise(`ps -p ${pid} -o lstart=`);
+    let outputLines = linuxRaw.split("\n");
+    if(outputLines.length === 0) {
+        throw new Error(`Cannot find process ${pid}`);
+    }
+    return mapLinuxInfo({STARTED: outputLines[0]});
+    /*
     let linuxRaw = await execPromise(`ps -p ${pid} -o lstart`);
 
     let outputLines = TableParser.parse<LinuxInfoRaw>(linuxRaw);
@@ -134,12 +141,13 @@ async function getLinuxInfo(pid: number): Promise<LinuxInfo> {
         throw new Error(`Cannot find process ${pid}`);
     }
     return mapLinuxInfo(outputLines[0]);
+    */
 }
 
 type ProcessInfo = WindowsInfo | LinuxInfo;
 export async function GetInfo(pid: number, fastPowershellCommandRunner?: TransformedChannel<string, string>): Promise<ProcessInfo> {
     if(process.platform === "win32") {
-        return getWindowsInfo(pid);
+        return getWindowsInfo(pid, fastPowershellCommandRunner);
     } else if(process.platform === "linux" || process.platform === "darwin") {
         return getLinuxInfo(pid);
     } else {
@@ -148,17 +156,22 @@ export async function GetInfo(pid: number, fastPowershellCommandRunner?: Transfo
 }
 
 export function GetInfoChannel(): ((pid: number) => Promise<ProcessInfo>) & { Close(): void } {
-    let ps = new shell({ debugMsg: false });
-    const fastPowershellCommand = TransformChannel<string, string>(command => {
-        ps.addCommand(command);
-        return ps.invoke();
-    }, () => {
-        ps.dispose();
-    });
+    let fastPowershellCommandRunner: TransformedChannel<string, string> & {Close(): void}|undefined;
+    if(process.platform === "win32") {
+        let ps = new shell({ debugMsg: false });
+        fastPowershellCommandRunner = TransformChannel<string, string>(command => {
+            ps.addCommand(command);
+            return ps.invoke();
+        }, () => {
+            ps.dispose();
+        });
+    }
     return TransformChannel(pid => {
-        return GetInfo(pid, fastPowershellCommand);
+        return GetInfo(pid, fastPowershellCommandRunner);
     }, () => {
-        fastPowershellCommand.Close();
+        if(fastPowershellCommandRunner) {
+            fastPowershellCommandRunner.Close();
+        }
     });
 }
 

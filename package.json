@@ -3,7 +3,7 @@
     "start": "bash watch.sh"
   },
   "name": "p-info",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "./dist/p-info.js",
   "types": "./dist/p-info.d.ts",
   "author": "yeerkkiller1 <yeerkkiller1@gmail.com>",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@types/node-powershell": "^3.1.0",
-    "node-powershell": "https://github.com/yeerkkiller1/node-powershell",
+    "node-powershell": "https://github.com/yeerkkiller1/node-powershell#EOI",
     "pchannel": "^0.3.4",
     "table-parser": "^1.0.1",
     "upgrade": "^1.1.0",

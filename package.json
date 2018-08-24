@@ -3,7 +3,7 @@
     "start": "bash watch.sh"
   },
   "name": "p-info",
-  "version": "0.1.15",
+  "version": "0.2.0",
   "main": "./dist/p-info.js",
   "types": "./dist/p-info.d.ts",
   "author": "yeerkkiller1 <yeerkkiller1@gmail.com>",
@@ -32,6 +32,7 @@
     "node-powershell": "https://github.com/yeerkkiller1/node-powershell",
     "pchannel": "^0.3.4",
     "table-parser": "^1.0.1",
-    "upgrade": "^1.1.0"
+    "upgrade": "^1.1.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }

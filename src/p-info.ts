@@ -91,12 +91,6 @@ async function getWindowsInfo(pid: number, fastPowershellCommandRunner?: Transfo
         ps.addCommand(command);
         rawText = await ps.invoke();
         ps.dispose();
-        fastPowershellCommandRunner = TransformChannel<string, string>(command => {
-            
-            return ps.invoke();
-        }, () => {
-            ps.dispose();
-        });
     }
 
     let rawInfo: WindowsInfoRaw = JSON.parse(rawText);
